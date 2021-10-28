@@ -1,0 +1,27 @@
+<ion-header [translucent]="true" mode="md" class="ion-no-border">
+    <ion-toolbar color="dark" class="ion-text-center">
+        <ion-buttons slot="start" (click)="scrollTop()">
+            <ion-button fill="clear" shape="round">
+                <ion-icon slot="icon-only" name="caret-up"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Objetos perdidos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+
+    <ion-refresher slot="fixed" (ionRefresh)="cargarPosts($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <app-post-card [index]="i" (eliminado)="eliminarPost($event)" [accion]="post" [post]="post" *ngFor="let post of posts; let i=index;"></app-post-card>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header style="height: 0px;opacity: 0;">
+    <ion-toolbar>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content color="dark" fullscreen="true">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="danger" (click)="nuevo()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <!-- <img src="./assets/img/backdrop-objetos.jpg"> -->
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-text class="ion-text-center">
+                    <h1>Mis objetos</h1>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="objetos.length===0">
+        <ion-row>
+            <ion-col>
+                <ion-text class="ion-text-center">
+                    <h6>No hay objetos disponibles</h6>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid color="dark">
+        <ion-row *ngFor="let objeto of objetos; let i=index;">
+            <ion-item-sliding>
+                <ion-item-options>
+                    <ion-item-option color="tertiary">
+                        <ion-icon slot="icon-only" name="megaphone" (click)="post(objeto)"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+                <ion-item-options side="start">
+                    <ion-item-option>
+                        <ion-icon slot="icon-only" name="settings" (click)="modificar(i)"></ion-icon>
+                    </ion-item-option>
+                    <ion-item-option color="danger">
+                        <ion-icon slot="icon-only" name="trash" (click)="eliminar(objeto._id, i)"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+                <ion-item mode="ios" color="dark">
+                    <ion-label position="stacked">
+                        <h2>{{objeto.nombre}}</h2>
+                        <ion-text *ngIf="objeto.estado !== 'Encontrado'" [color]="(objeto.estado==='Perdido')?'danger':'success'">
+                            <h6>{{objeto.estado}}</h6>
+                        </ion-text>
+                        <ion-text *ngIf="objeto.estado === 'Encontrado'" color="tertiary">
+                            <h6>{{objeto.estado}}</h6>
+                        </ion-text>
+                    </ion-label>
+                </ion-item>
+            </ion-item-sliding>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll color="primary" threshold="10px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-content class="align-items-center" color="dark">
+
+    <ion-grid class="align-items-center">
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <img src="./assets/img/img1.svg" class="imgLogin">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <form class="mt-40" #formulario="ngForm">
+            <ion-row>
+                <ion-col>
+                    <ion-item color="dark" mode="ios">
+                        <ion-label position="stacked">UserID</ion-label>
+                        <ion-input minlength="8" required name="userID" #userID="ngModel" [(ngModel)]="usuario.userID" type="text" [color]="(userID.errors?.required || userID.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item-sliding>
+                        <ion-item-options side="start">
+                            <ion-item-option (click)="verPassword = !verPassword">
+                                <ion-icon slot="icon-only" [name]="(!verPassword)?'eye':'eye-off'"></ion-icon>
+                            </ion-item-option>
+                        </ion-item-options>
+                        <ion-item color="dark" mode="ios">
+                            <ion-label position="stacked">Contraseña</ion-label>
+                            <ion-input minlength="8" required name="password" #password="ngModel" [(ngModel)]="usuario.password" [type]="(!verPassword)?'password':'text'" [color]="(password.errors?.required || password.errors?.minlength)?'danger':'success'"></ion-input>
+                        </ion-item>
+                    </ion-item-sliding>
+                </ion-col>
+            </ion-row>
+            <ion-row class="mt-40">
+                <ion-col class="ion-text-center">
+                    <ion-button color="primary" shape="round" mode="ios" [disabled]="!formulario.valid" (click)="ingresar()">
+                        Ingresar
+                        <ion-icon name="flash-sharp" slot="start"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col class="ion-text-center">
+                    <ion-button color="danger" shape="round" mode="ios" (click)="nuevo()">
+                        Nuevo
+                        <ion-icon slot="start" name="add-circle-sharp"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+</ion-content>

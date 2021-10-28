@@ -1,0 +1,25 @@
+<ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar color="dark">
+        <ion-title class="ion-text-center">
+            <ion-label>Chats</ion-label>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+    <ion-item *ngFor="let chat of chats" color="dark" (click)="mostrarMensajes(chat)">
+        <ion-avatar slot="start">
+            <img *ngIf="whoami || chat" [src]="(filtrarDatosChat(chat).destinatario.avatar) | domSanitizer:'imgAvatar'">
+        </ion-avatar>
+        <ion-label>
+            <h3>
+                <b>{{filtrarDatosChat(chat).destinatario.nombre}} {{filtrarDatosChat(chat).destinatario.apellidos}}</b>
+            </h3>
+            <h5>
+                <ion-text color="primary">
+                    <b>{{filtrarDatosChat(chat).destinatario.carrera}}</b>
+                </ion-text>
+            </h5>
+        </ion-label>
+    </ion-item>
+</ion-content>

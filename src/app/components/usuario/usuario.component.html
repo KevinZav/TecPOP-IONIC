@@ -1,0 +1,86 @@
+<ion-header style="height: 0px;opacity: 0;">
+    <ion-toolbar>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content color="dark" fullscreen="true">
+    <img src="./assets/img/backdrop.jpg">
+    <ion-grid>
+
+        <ion-row>
+            <ion-col size="4" class="poster-detalle-sobre" (click)="cambiarImagen()">
+                <!-- background-image: url('./assets/img/persona1.jpg'); -->
+                <ion-card class="poster-detalles" [style]="imagenDeAvatar | domSanitizer:(cambioAvatar)?'local':''">
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+    <ion-grid fixed color="dark">
+        <form #forma="ngForm">
+            <ion-row>
+                <ion-col>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked">UserID</ion-label>
+                        <ion-input minlength="8" required [disabled]="accion!=='nuevo'" name="userID" #userID="ngModel" [(ngModel)]="usuario.userID" [color]="(userID.errors?.required || userID.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked">Nombre</ion-label>
+                        <ion-input minlength="3" required name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre" [color]="(nombre.errors?.required || nombre.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked">Apellidos</ion-label>
+                        <ion-input minlength="3" required name="apellidos" #apellidos="ngModel" [(ngModel)]="usuario.apellidos" [color]="(apellidos.errors?.required || apellidos.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked">Carrera</ion-label>
+                        <ion-input minlength="3" required name="carrera" #carrera="ngModel" [(ngModel)]="usuario.carrera" [color]="(carrera.errors?.required || carrera.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-item-sliding>
+                    <ion-item-options side="start">
+                        <ion-item-option (click)="verPassword = !verPassword">
+                            <ion-icon slot="icon-only" [name]="(!verPassword)?'eye':'eye-off'"></ion-icon>
+                        </ion-item-option>
+                        <ion-item-option *ngIf="accion!=='nuevo'" (click)="clickEnablePassword()" color="danger">
+                            <ion-icon slot="icon-only" [name]="(!modificarPassword)?'lock-closed':'lock-open'"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked">Contraseña{{(accion!=='nuevo')?'(opcional)':''}}</ion-label>
+                        <ion-input [disabled]="!modificarPassword" [type]="(verPassword)? 'text':'password'" minlength="8" [required]="modificarPassword || accion==='nuevo'" name="password" #password="ngModel" [(ngModel)]="usuario.password" [color]="(password.errors?.required || password.errors?.minlength)?'danger':'success'"></ion-input>
+                    </ion-item>
+                </ion-item-sliding>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center">
+                    <ion-button color="primary" shape="round" mode="ios" [disabled]="!forma.valid" (click)="accionUsuario()">
+                        {{(accion==='nuevo')?'Agregar':'Actualizar'}}
+                        <ion-icon slot="start" [name]="(accion==='nuevo')?'add-circle-sharp':'save'"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col class="ion-text-center">
+                    <ion-button color="danger" shape="round" mode="ios" (click)="salir()">
+                        Cancelar
+                        <ion-icon slot="start" name="close-circle"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+
+</ion-content>

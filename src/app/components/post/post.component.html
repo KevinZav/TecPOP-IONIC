@@ -1,0 +1,58 @@
+<ion-header style="height: 0px;opacity: 0;">
+    <ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content color="dark" class="ion-no-padding">
+    <ion-grid>
+        <ion-row>
+            <ion-col color="dark">
+                <ion-text class="ion-text-center">
+                    <h1>{{(accion==='nuevo')?'Publicar perdida':'Actualizar publicacion'}}</h1>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <form #forma="ngForm">
+            <ion-row>
+                <ion-col>
+                    <ion-item mode="ios" color="dark">
+                        <ion-label position="stacked"></ion-label>
+                        <ion-textarea minlength="3" required name="mensaje" #mensaje="ngModel" [(ngModel)]="post.mensaje" [color]="(mensaje.errors?.required || mensaje.errors?.minlength)?'danger':'success'" placeholder="¿Cómo perdiste o encontraste tu objeto?"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-radio-group required [value]="post.objeto.estado" name="estado" #estado="ngModel" [(ngModel)]="post.objeto.estado">
+                        <ion-item color="dark">
+                            <ion-label>Perdido</ion-label>
+                            <ion-radio color="danger" slot="end" value="Perdido"></ion-radio>
+                        </ion-item>
+                        <ion-item color="dark">
+                            <ion-label>Encontrado</ion-label>
+                            <ion-radio color="tertiary" slot="end" value="Encontrado"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-button [disabled]="!forma.valid || post.objeto.estado==='Activo'" (click)="accionPublicacion()">Publicar</ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col color="dark">
+                <ion-text class="ion-text-center">
+                    <h4>Vista previa</h4>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <app-post-card [accion]="'produccion'" [post]="post"></app-post-card>
+
+</ion-content>

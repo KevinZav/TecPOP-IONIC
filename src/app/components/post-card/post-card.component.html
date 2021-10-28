@@ -1,0 +1,52 @@
+<ion-col class="post" color="dark">
+
+    <ion-item lines="none" color="dark">
+        <ion-avatar slot="start">
+            <img [src]="(post.usuario.avatar) | domSanitizer:'imgAvatar'">
+        </ion-avatar>
+        <ion-label>
+            <h3 *ngIf="post">{{post.usuario.nombre}} {{post.usuario.apellidos}}</h3>
+            <ion-text color="medium">
+                <h5 *ngIf="post">{{post.created | date:'dd-MM-yyyy, h:mm a'}}</h5>
+            </ion-text>
+        </ion-label>
+        <ion-icon (click)="opciones()" name="ellipsis-horizontal"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" color="dark">
+        <ion-label text-wrap *ngIf="post">
+            {{post.mensaje}}
+        </ion-label>
+    </ion-item>
+    <ion-slides pager="true" *ngIf="post.objeto.fotos.length >= 1" color="dark">
+        <ion-slide class="image-slide" [style]="foto | domSanitizer:'objeto':post.objeto._id" *ngFor="let foto of post.objeto.fotos||[]">
+        </ion-slide>
+    </ion-slides>
+
+    <ion-item lines="none" color="dark">
+        <ion-icon *ngIf="!reaccion" (click)="reaccionar()" slot="start" name="heart-outline"></ion-icon>
+        <ion-icon *ngIf="reaccion" color="primary" (click)="reaccionar()" slot="start" name="heart"></ion-icon>
+        <ion-icon (click)="verComentarios()" name="chatbubble-outline"></ion-icon>
+        <ion-icon slot="end" name="bookmark" color="tertiary" *ngIf="post.objeto.estado==='Encontrado'"></ion-icon>
+        <ion-icon slot="end" name="bookmark" color="danger" *ngIf="post.objeto.estado==='Perdido'"></ion-icon>
+        <ion-icon slot="end" name="bookmark" color="success" *ngIf="post.objeto.estado==='Activo'"></ion-icon>
+    </ion-item>
+    <ion-item color="dark" lines="none" *ngIf="accion!=='produccion' && post.reacciones.length>0">
+        <ion-label *ngIf="post.reacciones.length===1 && post">Le gusta a 1 persona</ion-label>
+        <ion-label *ngIf="post.reacciones.length>1 && post">Le gusta a {{post.reacciones.length}} personas</ion-label>
+    </ion-item>
+    <ion-item color="dark" lines="none" *ngIf="comentarios.length>0">
+        <ion-label *ngIf="comentarios.length===1">
+            <ion-text color="medium">1 comentario</ion-text>
+        </ion-label>
+        <ion-label *ngIf="comentarios.length>1">
+            <ion-text color="medium">{{comentarios.length}} comentarios</ion-text>
+        </ion-label>
+    </ion-item>
+    <ion-item color="dark" mode="ios">
+        <ion-avatar slot="start" *ngIf="whoami">
+            <img [src]="(whoami.avatar) | domSanitizer:'imgAvatar'">
+        </ion-avatar>
+        <ion-input [(ngModel)]="comentario" placeholder="Comentar..."></ion-input>
+        <ion-icon (click)="comentar()" slot="end" [color]="(comentario.length>0)?'primary':'medium'" name="paper-plane"></ion-icon>
+    </ion-item>
+</ion-col>

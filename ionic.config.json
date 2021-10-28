@@ -1,0 +1,7 @@
+{
+  "name": "tecpop",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

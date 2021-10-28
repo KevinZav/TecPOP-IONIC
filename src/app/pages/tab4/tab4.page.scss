@@ -1,0 +1,45 @@
+.poster-detalle-sobre {
+    position: relative;
+    top: -100px;
+    left: -10px;
+    margin-bottom: -120px;
+}
+
+.titulo {
+    width: 100%;
+    position: absolute;
+    color: white;
+    background-color: red;
+    padding: 5px 5px 40px 5px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    /* IE6-9 */
+}
+
+.titulo h1 {
+    position: absolute;
+    top: 28px;
+    left: 5px;
+}
+
+.card-actor {
+    height: 210px;
+}
+
+.actor-name {
+    top: 15px;
+    margin-top: 2px;
+}
+
+.poster-detalles {
+    width: 150px !important;
+    height: 150px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

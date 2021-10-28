@@ -1,0 +1,18 @@
+.comentario {
+    margin: 10px;
+    display: flex;
+    background-color: transparent;
+}
+
+.comentario .avatar {
+    width: 15%;
+    margin: 10px;
+}
+
+.comentario .contenido {
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: rgb(50, 50, 50);
+    border-radius: 10px;
+}
